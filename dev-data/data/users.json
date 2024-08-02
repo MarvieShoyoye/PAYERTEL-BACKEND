@@ -1,0 +1,50 @@
+[
+  {
+    "name": "John Doe",
+    "email": "john@example.com",
+    "phone": "1234567890",
+    "role": "user",
+    "password": "password123",
+    "passwordConfirm": "password123"
+  },
+  {
+    "name": "Jane Smith",
+    "email": "jane@example.com",
+    "phone": "0987654321",
+    "role": "user",
+    "password": "password123",
+    "passwordConfirm": "password123"
+  },
+  {
+    "name": "Alice Johnson",
+    "email": "alice@example.com",
+    "phone": "1122334455",
+    "role": "user",
+    "password": "password123",
+    "passwordConfirm": "password123"
+  },
+  {
+    "name": "Bob Brown",
+    "email": "bob@example.com",
+    "phone": "5566778899",
+    "role": "user",
+    "password": "password123",
+    "passwordConfirm": "password123"
+  },
+  {
+    "name": "Admin One",
+    "email": "admin1@example.com",
+    "phone": "2233445566",
+    "role": "admin",
+    "password": "adminpassword123",
+    "passwordConfirm": "adminpassword123"
+  },
+  {
+    "name": "Admin Two",
+    "email": "admin2@example.com",
+    "phone": "6677889900",
+    "role": "admin",
+    "password": "adminpassword123",
+    "passwordConfirm": "adminpassword123"
+  }
+]
