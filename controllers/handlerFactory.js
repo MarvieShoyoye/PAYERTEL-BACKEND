@@ -1,4 +1,4 @@
-import APIFeatures from '../utils/apiFeatures.js'; // Corrected import to match file name
+import APIFeatures from '../utils/apiFeatures.js';
 import AppError from '../utils/appError.js';
 import catchAsync from '../utils/catchAsync.js';
 
