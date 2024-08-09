@@ -12,6 +12,8 @@ import hpp from 'hpp';
 
 import authRouter from './routes/authRoutes.js';
 import userRouter from './routes/userRoutes.js';
+import dataBundleRouter from './routes/databundleRoutes.js';
+import dataPurchaseRouter from './routes/datapurchaseRoutes.js';
 import globalErrorHandler from './controllers/errorController.js';
 import AppError from './utils/appError.js';
 import session from 'express-session';
@@ -91,6 +93,8 @@ app.use(
 // 2) ROUTES
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/users', userRouter);
+app.use("/api/v1/databundle", dataBundleRouter);
+app.use("/api/v1/datapurchase", dataPurchaseRouter);
 
 // Handling all undefined routes
 app.all('*', (req, res, next) => {
