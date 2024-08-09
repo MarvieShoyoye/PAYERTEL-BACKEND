@@ -3,19 +3,19 @@ import AppError from '../utils/appError.js';
 
 dotenv.config();
 
-const handleCastErrorDB = (err) => {
+const handleCastErrorDB = err => {
   const message = `Invalid ${err.path}: ${err.value}.`;
   return new AppError(message, 400);
 };
 
-const handleDuplicateFieldsDB = (err) => {
+const handleDuplicateFieldsDB = err => {
   const value = err.keyValue ? Object.values(err.keyValue).join(', ') : '';
   const message = `Duplicate field value: ${value}. Please use another value!`;
   return new AppError(message, 400);
 };
 
-const handleValidationErrorDB = (err) => {
-  const errors = Object.values(err.errors).map((el) => el.message);
+const handleValidationErrorDB = err => {
+  const errors = Object.values(err.errors).map(el => el.message);
   const message = `Invalid input data. ${errors.join('. ')}`;
   return new AppError(message, 400);
 };
@@ -27,6 +27,7 @@ const handleJWTExpiredError = () =>
   new AppError('Your token has expired! Please log in again.', 401);
 
 const sendErrorDev = (err, req, res) => {
+  console.log(err);
   // API
   if (req.originalUrl.startsWith('/api')) {
     return res.status(err.statusCode).json({
@@ -55,6 +56,7 @@ const sendErrorProd = (err, req, res) => {
         message: err.message,
       });
     }
+
     // Programming or other unknown error: don't leak error details
     console.error('ERROR 💥', err);
     return res.status(500).json({

@@ -49,6 +49,15 @@ export const signup = catchAsync(async (req, res, next) => {
     );
   }
 
+  if (await User.findOne({ phone })) {
+    return next(
+      new AppError(
+        'Phone number already exists, please login or reset your passord if you have forgotten it.',
+        400
+      )
+    );
+  }
+
   const otp = generateOTP();
   const otpExpires = Date.now() + 10 * 60 * 1000; // 10 minutes from now
 
@@ -100,7 +109,6 @@ export const verifyOTP = catchAsync(async (req, res, next) => {
 
 export const resendOTP = catchAsync(async (req, res, next) => {
   const { user } = req.session;
-  console.log(req.session);
 
   if (!user) {
     return next(new AppError('No user found in session', 400));
