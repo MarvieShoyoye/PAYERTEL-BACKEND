@@ -100,7 +100,6 @@ export const verifyOTP = catchAsync(async (req, res, next) => {
 
 export const resendOTP = catchAsync(async (req, res, next) => {
   const { user } = req.session;
-  console.log(req.session);
 
   if (!user) {
     return next(new AppError('No user found in session', 400));
