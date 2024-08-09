@@ -9,12 +9,13 @@ import mongoSanitize from 'express-mongo-sanitize';
 import rateLimit from 'express-rate-limit';
 import xss from 'xss-clean';
 import hpp from 'hpp';
+import session from 'express-session';
+import MongoStore from 'connect-mongo';
 
 import authRouter from './routes/authRoutes.js';
 import userRouter from './routes/userRoutes.js';
 import globalErrorHandler from './controllers/errorController.js';
 import AppError from './utils/appError.js';
-import session from 'express-session';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -25,11 +26,17 @@ const app = express();
 
 app.use(express.json());
 
+// Use MongoDB for session storage
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.DB,
+      ttl: 1 * 24 * 60 * 60, // = 14 days
+      autoRemove: 'native', // Automatically remove expired sessions
+    }),
     cookie: {
       maxAge: 1000 * 60 * 60 * 24, // 1 day
     },
@@ -47,7 +54,7 @@ app.set('view engine', 'pug');
 
 // Enable CORS with specific options
 const corsOptions = {
-  origin: 'http://localhost:5173', // Update this to the origin of your client app
+  origin: process.env.CLIENT_URL,
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true, // Allow credentials (cookies, authorization headers, etc.)
 };
